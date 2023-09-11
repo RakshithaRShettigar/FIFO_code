@@ -17,7 +17,7 @@ class fifo_sequence_item extends uvm_sequence_item;
   `uvm_field_int(o_alm_full, UVM_ALL_ON)
   `uvm_field_int(o_alm_empty, UVM_ALL_ON)
   `uvm_object_utils_end
-  constraint wr_rd2 {{wr,rd} inside {00,01,10,11};}
+  constraint wr_rd {{wr,rd} inside {00,01,10,11};}
   
   function new(string name = "f_sequence_item");
     super.new(name);
