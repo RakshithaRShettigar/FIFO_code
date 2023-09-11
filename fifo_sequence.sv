@@ -38,7 +38,7 @@ class fifo_sequence extends uvm_sequence#(fifo_sequence_item);
    repeat(10) begin
       req = fifo_sequence_item::type_id::create("req");
       start_item(req);
-     assert(req.randomize()) with ({{i_wren,i_rden} == 2'b00;});
+     assert (req.randomize()) with ({{i_wren,i_rden} == 2'b00;});
       finish_item(req);
     end
   endtask
