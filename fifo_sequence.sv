@@ -44,5 +44,6 @@ class fifo_sequence extends uvm_sequence#(fifo_sequence_item);
   endtask
   
 endclass
-  
+
+               
   
