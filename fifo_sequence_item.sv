@@ -8,7 +8,7 @@ class fifo_sequence_item extends uvm_sequence_item;
   bit o_alm_empty;
   bit [127:0] o_rddata;
   
-  `uvm_object_utils_begin(f_sequence_item)
+  `uvm_object_utils_begin(fifo_sequence_item)
   `uvm_field_int(i_wren, UVM_ALL_ON)
   `uvm_field_int(i_rden, UVM_ALL_ON)
   `uvm_field_int(i_wrdata, UVM_ALL_ON)
