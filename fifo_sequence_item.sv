@@ -19,7 +19,7 @@ class fifo_sequence_item extends uvm_sequence_item;
   `uvm_object_utils_end
   constraint wr_rd {{wr,rd} inside {00,01,10,11};}
   
-  function new(string name = "f_sequence_item");
+  function new(string name = "fifo_sequence_item");
     super.new(name);
   endfunction
 
