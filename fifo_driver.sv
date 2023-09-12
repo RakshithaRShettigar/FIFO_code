@@ -13,19 +13,18 @@ class fifo_driver extends uvm_driver#(fifo_sequence_item);
       `uvm_fatal("Driver: ", "No vif is found!")
   endfunction
 
-  virtual task run_phase(uvm_phase phase);
-    
+  virtual task run_phase(uvm_phase phase);    
     forever begin
-      if(vif.rstn == 0)  
-        repeat(1) @(vif.d_cb.clk) begin
+    if(vif.rstn == 0)  
+    repeat(1) @(vif.d_cb.clk) begin
     vif.d_mp.d_cb.i_wren <= 1'b0;
     vif.d_mp.d_cb.i_rden <= 1'b0;
     vif.d_mp.d_cb.i_wrdata <= 1'b0;
       end
       seq_item_port.get_next_item(req);
-      if(req.i_wren == 1)
+      if(req.i_wren == 1) 
         main_write(req.i_wrdata);
-      else if(req.i_rden == 1)
+      if(req.i_rden == 1)
         main_read();
       seq_item_port.item_done();
     end
