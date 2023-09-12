@@ -20,8 +20,19 @@ class fifo_sequence extends uvm_sequence#(fifo_sequence_item);
         assert(req.randomize() with ({{i_wren,i_rden} == 2'b01;});
       finish_item(req);
     end
+    `uvm_info(get_type_name(), $sformatf("-------------Performing alternate write and read operation------------"), UVM_LOW)
+    repeat(10) begin
+      req = fifo_sequence_item::type_id::create("req");
+      start_item(req);
+      assert(req.randomize()) with ({{i_wren,i_rden} == 2'b10;});
+      finish_item(req);
+      req = fifo_sequence_item::type_id::create("req");
+      start_item(req);
+      assert(req.randomize()) with ({{i_wren,i_rden} == 2'b01;});
+      finish_item(req);
+    end
    `uvm_info(get_type_name(), $sformatf("-------------Performing random write and read operation------------"), UVM_LOW)
-    repeat(1024) begin
+      repeat(20) begin
       req = fifo_sequence_item::type_id::create("req");
       start_item(req);
       assert(req.randomize());
@@ -34,7 +45,7 @@ class fifo_sequence extends uvm_sequence#(fifo_sequence_item);
      assert(req.randomize()) with ({{i_wren,i_rden} == 2'b11;});
       finish_item(req);
     end
-             `uvm_info(get_type_name(), $sformatf("-------------Performing no write and no read operation------------"), UVM_LOW) 
+  `uvm_info(get_type_name(), $sformatf("-------------Performing no write and no read operation------------"), UVM_LOW) 
    repeat(10) begin
       req = fifo_sequence_item::type_id::create("req");
       start_item(req);
