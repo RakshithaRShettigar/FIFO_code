@@ -53,8 +53,8 @@ class fifo_monitor extends uvm_monitor;
       end
       if((vif.m_mp.m_cb.i_wren==0)&&(vif.m_mp.m_cb.i_rden==0))begin
         $display("\nwrite enable is high");
-        item_got.wr = 'b0;
-        item_got.rd = 'b0;
+        item_got.i_wren = 'b0;
+        item_got.i_rden = 'b0;
         item_got_port.write(item_got);
       end
     end
