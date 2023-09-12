@@ -21,7 +21,6 @@ class fifo_agent extends uvm_agent;
     if(get_is_active() == UVM_ACTIVE)
       f_dri.seq_item_port.connect(f_seqr.seq_item_export);
   endfunction
-  
 endclass
     
     
