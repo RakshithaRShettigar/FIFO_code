@@ -19,9 +19,9 @@ interface f_interface(input clk, rstn);
     default input #1 output #0;
     input o_full;
     input o_empty;
-input o_alm_full;
-input o_alm_empty;
-input o_rddata;
+    input o_alm_full;
+    input o_alm_empty;
+    input o_rddata;
   endclocking
   
   modport d_mp (input clk, rstn, clocking d_cb);
