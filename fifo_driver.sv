@@ -14,12 +14,14 @@ class fifo_driver extends uvm_driver#(fifo_sequence_item);
   endfunction
 
   virtual task run_phase(uvm_phase phase);
-    if(vif.rstn == 0)  
-      repeat(1) @(vif.d_cb) begin
+    
+    forever begin
+      if(vif.rstn == 0)  
+        repeat(1) @(vif.d_cb.clk) begin
     vif.d_mp.d_cb.i_wren <= 1'b0;
     vif.d_mp.d_cb.i_rden <= 1'b0;
     vif.d_mp.d_cb.i_wrdata <= 1'b0;
-    forever begin
+      end
       seq_item_port.get_next_item(req);
       if(req.i_wren == 1)
         main_write(req.i_wrdata);
