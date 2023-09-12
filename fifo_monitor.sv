@@ -20,21 +20,39 @@ class fifo_monitor extends uvm_monitor;
   virtual task run_phase(uvm_phase phase);
     forever begin
       @(posedge vif.m_mp.clk)
-      if(vif.m_mp.m_cb.wr == 1)begin
-        $display("\nwrite enable is high");
+      if((vif.m_mp.m_cb.i_wren == 1)&&(vif.m_mp.m_cb.i_rden == 0))begin
+        $display("\nwrite enable is high and read enable is low");
         item_got.data_in = vif.m_mp.m_cb.data_in;
-        item_got.wr = 'b1;
-        item_got.rd = 'b0;
-        item_got.full = vif.m_mp.m_cb.full;
+        item_got.i_wren = 'b1;
+        item_got.i_rden = 'b0;
+        item_got.o_full = vif.m_mp.m_cb.o_full;
+        item_got.o_empty = vif.m_mp.m_cb.o_empty;
+        item_got.o_alm_full = vif.m_mp.m_cb.o_alm_full;
+        item_got.o_alm_empty = vif.m_mp.m_cb.o_alm_empty;
         item_got_port.write(item_got);
       end
-      if(vif.m_mp.m_cb.rd == 1)begin
+      if((vif.m_mp.m_cb.i_rden == 1)&&(vif.m_mp.m_cb.i_wren == 0))begin
         @(posedge vif.m_mp.clk)
-        $display("\nRD is high");
-        item_got.data_out = vif.m_mp.m_cb.data_out;
-        item_got.rd = 'b1;
+        $display("\nwrite enable is low and read enable is high");
+        item_got.o_rddata = vif.m_mp.m_cb.o_rddata;
+        item_got.i_rden = 'b1;
+        item_got.i_wren = 'b0;
+        item_got.o_empty = vif.m_mp.m_cb.o_empty;
+        item_got.o_full = vif.m_mp.m_cb.o_full;
+        item_got_port.write(item_got);
+      end
+      if((vif.m_mp.m_cb.i_wren)&&(vif.m_mp.m_cb.i_rden) == 1)begin
+        $display("\nwrite enable and read enable is high");
+        item_got.i_wrdata = vif.m_mp.m_cb.i_wrdata;
+        item_got.i_wren = 'b1;
+        item_got.i_rden = 'b1;
+        item_got.o_full = vif.m_mp.m_cb.o_full;
+        item_got_port.write(item_got);
+      end
+      if((vif.m_mp.m_cb.i_wren==0)&&(vif.m_mp.m_cb.i_rden==0))begin
+        $display("\nwrite enable is high");
         item_got.wr = 'b0;
-        item_got.empty = vif.m_mp.m_cb.empty;
+        item_got.rd = 'b0;
         item_got_port.write(item_got);
       end
     end
