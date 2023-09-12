@@ -46,12 +46,9 @@ class fifo_monitor extends uvm_monitor;
       if((vif.m_mp.m_cb.i_wren)&&(vif.m_mp.m_cb.i_rden) == 1)begin
         $display("\nwrite enable and read enable is high");
         item_got.i_wrdata = vif.m_mp.m_cb.i_wrdata;
+        item_got.o_rddata = vif.m_mp.m_cb.o_rddata;
         item_got.i_wren = 'b1;
         item_got.i_rden = 'b1;
-        item_got.o_full = vif.m_mp.m_cb.o_full;
-        item_got.o_full = vif.m_mp.m_cb.o_full;
-        item_got.o_alm_full = vif.m_mp.m_cb.o_alm_full;
-        item_got.o_alm_empty = vif.m_mp.m_cb.o_alm_empty;
         item_got_port.write(item_got);
       end
       if((vif.m_mp.m_cb.i_wren==0)&&(vif.m_mp.m_cb.i_rden==0))begin
