@@ -25,7 +25,7 @@ class fifo_scoreboard extends uvm_scoreboard;
         $display("--------FIFO IS FULL--------"); 
       end
     end
-    else if (item_got.i_rden == 'b1)begin
+    if (item_got.i_rden == 'b1)begin
       if(check_fifo.size() >= 'd1)begin
         counter = counter--;
         testdata = check_fifo.pop_front();
