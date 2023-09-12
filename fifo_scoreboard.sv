@@ -19,7 +19,7 @@ class fifo_scoreboard extends uvm_scoreboard;
       if(check_fifo.size < 1023) begin
       counter = counter++;
       check_fifo.push_back(item_got.i_wrdata);
-      `uvm_info("write Data", $sformatf("wr: %0b rd: %0b data_in: %0h full: %0b",item_got.wr, item_got.rd,item_got.data_in, item_got.full), UVM_LOW);
+        `uvm_info("write Data", $sformatf("wr: %0b rd: %0b data_in: %0h full: %0b",item_got.wr, item_got.rd,item_got.i_wrdata, item_got.full), UVM_LOW);
       end
       else begin
         $display("--------FIFO IS FULL--------"); 
@@ -29,7 +29,7 @@ class fifo_scoreboard extends uvm_scoreboard;
       if(check_fifo.size() >= 'd1)begin
         counter = counter--;
         testdata = check_fifo.pop_front();
-        `uvm_info("Read Data", $sformatf("examdata: %0h data_out: %0h empty: %0b", examdata, item_got.data_out, item_got.empty), UVM_LOW);
+        `uvm_info("Read Data", $sformatf("testdata: %0h : %0h empty: %0b", testdata, item_got.i_rddata, item_got.o_empty), UVM_LOW);
         if(testdata == item_got.o_rddata)begin
           $display("--------MATCH SUCCESSFUL----------");
         end
