@@ -60,9 +60,9 @@ class fifo_scoreboard extends uvm_scoreboard;
     end
     if((counter <= 2) && (counter>0)) begin
       if(item_got.o_alm_empty == 1)
-      $display("ALMOST FULL condition is satisfied");
+      $display("ALMOST EMPTY condition is satisfied");
      else
-      $display("ALMOST FULL condition isn't satisfied");
+      $display("ALMOST EMPTY FULL condition isn't satisfied");
     end*/
   endfunction
 endclass
