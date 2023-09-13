@@ -1,7 +1,7 @@
 class fifo_test extends uvm_test;
   fifo_sequence f_seq;
   fifo_environment f_env;
-  `uvm_component_utils(f_test)
+  `uvm_component_utils(fifo_test)
   
   function new(string name = "fifo_test", uvm_component parent);
     super.new(name, parent);
@@ -17,7 +17,7 @@ class fifo_test extends uvm_test;
     phase.raise_objection(this);
     f_seq.start(f_env.f_agt.f_seqr);
     phase.drop_objection(this);
-    phase.phase_done.set_drain_time(this, 100);4
+    phase.phase_done.set_drain_time(this, 100);
   endtask
   
 endclass
