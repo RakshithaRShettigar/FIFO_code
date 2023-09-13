@@ -52,10 +52,18 @@ class fifo_scoreboard extends uvm_scoreboard;
       end
     end
     //If assertion isn't present
-    /*if(counter >= 1020 && counter<1024)
+    /*if(counter >= 1020 && counter<1024) begin
+      if(item_got.o_alm_full == 1)
       $display("ALMOST FULL condition is satisfied");
-    else
-      $display("ALMOST FULL condition isn't satisfied");*/
+     else
+      $display("ALMOST FULL condition isn't satisfied");
+    end
+    if((counter <= 2) && (counter>0)) begin
+      if(item_got.o_alm_empty == 1)
+      $display("ALMOST FULL condition is satisfied");
+     else
+      $display("ALMOST FULL condition isn't satisfied");
+    end*/
   endfunction
 endclass
         
