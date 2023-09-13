@@ -22,7 +22,12 @@ class fifo_scoreboard extends uvm_scoreboard;
         `uvm_info("write Data", $sformatf("write enable: %0b read enable: %0b write data: %0h full: %0b",item_got.i_wren, item_got.i_rden,item_got.i_wrdata, item_got.o_full), UVM_LOW);
       end
       else begin
-        $display("--------FIFO IS FULL--------"); 
+        $display("--------REFERENCE FIFO IS FULL--------"); 
+         //If assertion isn't present
+        /*if(item.got.o_full == 1)
+          $display("FULL condition is satisfied");
+        else
+          $display("FULL condition isn't satisfied");*/
       end
     end
     if (item_got.i_rden == 'b1)begin
@@ -38,9 +43,19 @@ class fifo_scoreboard extends uvm_scoreboard;
         end
       end
       else begin
-        $display("--------FIFO IS EMPTY--------");
+        $display("--------REFERENCE FIFO IS EMPTY--------");
+        //If assertion isn't present
+        /*if(item.got.o_empty == 1)
+          $display("EMPTY condition is satisfied");
+        else
+          $display("EMPTY condition isn't satisfied");*/
       end
     end
+    //If assertion isn't present
+    /*if(counter >= 1020 && counter<1024)
+      $display("ALMOST FULL condition is satisfied");
+    else
+      $display("ALMOST FULL condition isn't satisfied");*/
   endfunction
 endclass
         
