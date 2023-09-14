@@ -26,13 +26,13 @@ module tb;
   f_interface tif(clk, reset);
   
   SYN_FIFO dut(.clk(tif.clk),
-               .reset(tif.reset),
-               .data_in(tif.data_in),
-               .wr(tif.wr),
-               .rd(tif.rd),
-               .full(tif.full),
-               .empty(tif.empty),
-               .data_out(tif.data_out));
+               .rstn(tif.reset),
+               .i_wrdata(tif.data_in),
+               .i_wren(tif.i_wren),
+               .i_rden(tif.i_rden),
+               .o_full(tif.o_full),
+               .o_empty(tif.o_empty),
+               .o_rddata(tif.o_rddata));
   
   initial begin
     uvm_config_db#(virtual f_interface)::set(null, "", "vif", tif);
